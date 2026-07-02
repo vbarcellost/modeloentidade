@@ -4,25 +4,18 @@ Exercicio do modulo **Modelagem de entidade** da EBAC.
 
 ## O que foi pedido
 
-O exercicio pede uma modelagem JPA com duas entidades principais:
+O exercicio pede a criacao da classe entidade `Produto`, seguindo o modelo das aulas de JPA, para que a tabela seja criada automaticamente no banco de dados pelo Hibernate.
 
-- `Curso`
-- `Matricula`
-
-A modelagem deve criar as tabelas no banco de dados e representar o relacionamento entre elas:
-
-- um `Curso` pode possuir varias `Matricula`;
-- uma `Matricula` pertence a um unico `Curso`.
+Essa foi a classe indicada para a tarefa pratica do modulo.
 
 ## O que foi feito
 
 - Projeto Maven em Java 17.
-- Entidade `Curso` mapeada para `TB_CURSO`.
-- Entidade `Matricula` mapeada para `TB_MATRICULA`.
-- Relacionamento `@OneToMany` de `Curso` para `Matricula`.
-- Relacionamento `@ManyToOne` de `Matricula` para `Curso`.
-- Chave estrangeira `FK_CURSO_MATRICULA`.
-- Testes com H2 em memoria para validar a criacao das tabelas e a persistencia do relacionamento.
+- Entidade `Produto` mapeada para `TB_PRODUTO`.
+- Campos `id`, `codigo`, `nome`, `descricao` e `valor`.
+- Sequencia `SQ_PRODUTO` para gerar o identificador.
+- Configuracao JPA/Hibernate em `persistence.xml`.
+- Testes com H2 em memoria para validar a criacao da tabela e a persistencia de um produto.
 
 ## Como verificar
 
@@ -34,6 +27,5 @@ mvn test
 
 Os testes verificam:
 
-- se as tabelas `TB_CURSO` e `TB_MATRICULA` foram criadas;
-- se uma matricula e persistida vinculada a um curso;
-- se o relacionamento entre as entidades esta funcionando.
+- se a tabela `TB_PRODUTO` foi criada;
+- se um `Produto` e persistido e consultado corretamente.

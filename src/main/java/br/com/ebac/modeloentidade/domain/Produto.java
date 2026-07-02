@@ -1,26 +1,23 @@
 package br.com.ebac.modeloentidade.domain;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
-@Table(name = "TB_CURSO")
-public class Curso {
+@Table(name = "TB_PRODUTO")
+public class Produto {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "curso_seq")
-    @SequenceGenerator(name = "curso_seq", sequenceName = "SQ_CURSO", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "produto_seq")
+    @SequenceGenerator(name = "produto_seq", sequenceName = "SQ_PRODUTO", allocationSize = 1)
     private Long id;
 
     @Column(name = "CODIGO", length = 10, nullable = false, unique = true)
@@ -32,8 +29,8 @@ public class Curso {
     @Column(name = "DESCRICAO", length = 255, nullable = false)
     private String descricao;
 
-    @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Matricula> matriculas = new ArrayList<>();
+    @Column(name = "VALOR", nullable = false, precision = 10, scale = 2)
+    private BigDecimal valor;
 
     public Long getId() {
         return id;
@@ -63,26 +60,20 @@ public class Curso {
         this.descricao = descricao;
     }
 
-    public List<Matricula> getMatriculas() {
-        return matriculas;
+    public BigDecimal getValor() {
+        return valor;
     }
 
-    public void adicionarMatricula(Matricula matricula) {
-        matriculas.add(matricula);
-        matricula.setCurso(this);
-    }
-
-    public void removerMatricula(Matricula matricula) {
-        matriculas.remove(matricula);
-        matricula.setCurso(null);
+    public void setValor(BigDecimal valor) {
+        this.valor = valor;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof Curso curso)) {
+        if (!(o instanceof Produto produto)) {
             return false;
         }
-        return Objects.equals(codigo, curso.codigo);
+        return Objects.equals(codigo, produto.codigo);
     }
 
     @Override
